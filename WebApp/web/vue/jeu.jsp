@@ -54,12 +54,14 @@
              
            
             if(tour.equals("user") && nbRoundT<=nbRound){
+                out.println("<h3> Cliquez sur votre choix </h3>");
                 out.println("<a href='http://localhost:8080/WebApp/vue/jeu.jsp?idUser="+idUser+"&nbRound="+nbRound+"&nbRoundT="+nbRoundT+"&score="+score+"&tour=ordi&choix=1'> <img src='../image/pierre.jpg' width='70px' height='70px'> </a> ");
-                out.println("<img src='../image/feuille.jpg'width='70px' height='70px'> ");
-                out.println("<img src='../image/ciseau.jpg' width='70px' height='70px'>");
+                out.println("<a href='http://localhost:8080/WebApp/vue/jeu.jsp?idUser="+idUser+"&nbRound="+nbRound+"&nbRoundT="+nbRoundT+"&score="+score+"&tour=ordi&choix=2'><img src='../image/feuille.jpg'width='70px' height='70px'></a> ");
+                out.println("<a href='http://localhost:8080/WebApp/vue/jeu.jsp?idUser="+idUser+"&nbRound="+nbRound+"&nbRoundT="+nbRoundT+"&score="+score+"&tour=ordi&choix=3'><img src='../image/ciseau.jpg' width='70px' height='70px'></a>");
             }
             else {
                 if(nbRoundT>nbRound){
+                   
                     out.println("<h1>Votre partie est fini , votre score est de : "+score+"</h1>");
                 }
                 else{
@@ -69,7 +71,7 @@
            
             if(tour.equals("ordi")){
                 
-                out.println("<h2> Votre choix </h2>");
+                out.println("<p> Votre choix </p>");
                 if(choix==1){
                     out.println("<img src='../image/pierre.jpg' width='70px' height='70px'>");
                 }
@@ -83,6 +85,11 @@
                         
                     }
                 }
+                out.println("</br>");
+                out.println("</br>");
+                out.println("</br>");
+                
+                out.println("<p> Le choix de l'ordinateur</h2> </p>");
                 
                 int nombreAleatoire = 1 + (int)(Math.random() * ((3 - 1) + 1));
                 
@@ -99,12 +106,68 @@
                         
                     }
                 }
-            
+                
+                switch(choix){
+                    case 1:
+                        if(nombreAleatoire==1){
+                            out.println("<h3> Egalité </h3>");
+                        }
+                        else{
+                            if(nombreAleatoire ==2){
+                                out.println("<h3> L'ordinateur gagne la manche </h3>");
+                                score=score-75;
+                            }
+                            else{
+                                if(nombreAleatoire==3){
+                                    out.println("<h3> Vous gagnez la manche </h3>");
+                                    score=score+50;
+                                }
+                            }
+                        }
+                        break;
+                    case 2:
+                        if(nombreAleatoire==1){
+                            out.println("<h3> Vous gagnez la manche </h3>");
+                            score=score+50;
+                        }
+                        else{
+                            if(nombreAleatoire ==2){
+                                out.println("<h3> Egalité </h3>");
+                            }
+                            else{
+                                if(nombreAleatoire==3){
+                                    out.println("<h3> L'ordinateur gagne la manche </h3>");
+                                    score=score-75;
+                                }
+                            }
+                        }
+                        break;
+                    case 3:
+                        if(nombreAleatoire==1){
+                           out.println("<h3> L'ordinateur gagne la manche </h3>");
+                            score=score-75;
+                        }
+                        else{
+                            if(nombreAleatoire ==2){
+                                out.println("<h3> Vous gagnez la manche </h3>");
+                                score=score+50;
+                            }
+                            else{
+                                if(nombreAleatoire==3){
+                                    out.println("<h3> Egalité </h3>");
+                                }
+                            }
+                        }
+                    
+                        break;
+                }
+                
+                
                 
                 nbRoundT++;
-                score++;
+               
                 
-                out.println("<a href='http://localhost:8080/WebApp/vue/jeu.jsp?idUser="+idUser+"&nbRound="+nbRound+"&nbRoundT"+nbRoundT+"&score="+score+"&tour=user'><button type='button'> Suivant </button> <a>");
+                out.println("<a href='http://localhost:8080/WebApp/vue/jeu.jsp?idUser="+idUser+"&nbRound="+nbRound+"&nbRoundT="+nbRoundT+"&score="+score+"&tour=user'><button type='button'> Suivant </button> <a>");
                 
             }
            
