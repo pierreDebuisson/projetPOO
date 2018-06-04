@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package DAO;
-import model.User;
+import model.Game;
 
 /**
  *
- * @author pierredebuisson
+ * @author ursul
  */
-public interface UserDAO extends DAO<User>{
-    
-    
+public interface GameDAO extends DAO<Game> {
     
 }

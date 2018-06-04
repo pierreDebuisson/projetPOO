@@ -6,49 +6,46 @@
 package DAO;
 
 import java.util.List;
-import model.User;
+import model.Game;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import utils.HibernateUtil;
 
 /**
  *
- * @author pierredebuisson
+ * @author ursul
  */
-public class UserDAOImpl extends DAOImpl<User> implements DAO<User>{
-    
-    
+public class GameDAOImpl extends DAOImpl<Game> implements DAO<Game> {
 
     @Override
-    public List<User> findAll() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    public List<Game> findAll() {
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		@SuppressWarnings("unchecked")
-		List<User> users = (List<User>) session.createQuery("from User").list();
+		List<Game> games = (List<Game>) session.createQuery("from Game").list();
                 session.close();
-		return users;
-        
+		return games;
     }
 
     @Override
-    public User findById(Integer id, User object) {
+    public Game findById(Integer id, Game object) {
         return super.findById(id, object);
     }
 
     @Override
-    public User create(User object) {
+    public Game create(Game object) {
         return super.create(object);
     }
 
     @Override
-    public User update(User object) {
+    public Game update(Game object) {
         return super.update(object);
     }
 
     @Override
-    public User delete(User object) {
+    public Game delete(Game object) {
         return super.delete(object);
     }
-
+    
     
 }
