@@ -9,9 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Connexion</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div>
+            <form id="formConnexion" method="POST" action="/WebApp/UserController">
+                <input id="pseudo" type="text">
+                <input id="password" type="text">
+                <input id="connectionButton" type="submit" value="Se connecter">
+            </form>
+        </div>
     </body>
 </html>
