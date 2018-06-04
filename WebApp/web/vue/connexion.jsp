@@ -14,9 +14,9 @@
     <body>
         <div>
             <form id="formConnexion" method="POST" action="/WebApp/UserController">
-                <input id="pseudo" type="text">
-                <input id="password" type="text">
-                <input id="connectionButton" type="submit" value="Se connecter">
+                <input name="pseudo" type="text">
+                <input name="password" type="password">
+                <input name="connectionButton" type="submit" value="Se connecter">
             </form>
         </div>
     </body>

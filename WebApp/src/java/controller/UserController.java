@@ -5,13 +5,17 @@
  */
 package controller;
 
+import DAO.UserDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
@@ -31,18 +35,38 @@ public class UserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+            String pseudo = request.getParameter("pseudo");
+            String password = request.getParameter("password");
+            if (pseudo.equals("") && password.equals("")) {
+                out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<body>");
+                out.println("Erreur");
+                out.println("</body>");
+                out.println("</html>");
+                out.close();
+            } else {
+                UserDAOImpl userDAO = new UserDAOImpl();
+                List<User> users = userDAO.findAll();
+                for (User user : users) {
+                    if (user.getPseudo().equals(pseudo)) {
+                        if (password.equals(user.getPassword())) {
+                            out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<body>");
+                out.println("Utilisateur "+user.getPseudo()+" connecté.");
+                out.println("</body>");
+                out.println("</html>");
+                out.close();
+                            
+                        }
+                    }
+                }
+            }
         }
     }
 
