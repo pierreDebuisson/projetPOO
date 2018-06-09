@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login
-    Created on : 4 juin 2018, 08:26:57
-    Author     : Nous1
+    Document   : inscription
+    Created on : Jun 9, 2018, 4:13:31 PM
+    Author     : pierredebuisson
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,20 +9,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Connexion Utilisateur</title>
+        <title>Inscription Utilisateur</title>
     </head>
     <body>
         <div>
-            <form id="formConnexion" method="POST" action="/WebApp/UserController">
+            <form id="formRegister" method="POST" action="/WebApp/SignUpController">
                 <label>Username :</label>
                 <input name="pseudo" type="text">
                 <br>
                 <label>Password :</label>
                 <input name="password" type="password">
                 <br>
-                <input name="connectionButton" type="submit" value="Se connecter">
-            </form>
-            <form id="formRegister" method="POST" action="/WebApp/vue/inscription.jsp">
+                <label>Confirm Password :</label>
+                <input name="confirmPassword" type="password">
+                <br>
                 <input name="connectionButton" type="submit" value="Inscription">
             </form>
         </div>
