@@ -12,6 +12,11 @@ import model.User;
  */
 public interface UserDAO extends DAO<User>{
     
-    
+    /**
+     * Get a user by its username
+     * @param username : usename in input
+     * @return User from the database.
+     */
+    User getByUsername(String username);
     
 }

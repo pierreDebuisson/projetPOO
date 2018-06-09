@@ -5,29 +5,30 @@
  */
 package DAO;
 
+import java.util.Iterator;
 import java.util.List;
 import model.User;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 /**
  *
  * @author pierredebuisson
  */
-public class UserDAOImpl extends DAOImpl<User> implements DAO<User>{
-    
-    
+public class UserDAOImpl extends DAOImpl<User> implements DAO<User>, UserDAO {
 
     @Override
     public List<User> findAll() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		@SuppressWarnings("unchecked")
-		List<User> users = (List<User>) session.createQuery("from User").list();
-                session.close();
-		return users;
-        
+        Session session = sessionFactory.openSession();
+        @SuppressWarnings("unchecked")
+        List<User> users = (List<User>) session.createQuery("from User").list();
+        session.close();
+        return users;
+
     }
 
     @Override
@@ -50,5 +51,20 @@ public class UserDAOImpl extends DAOImpl<User> implements DAO<User>{
         return super.delete(object);
     }
 
-    
+    @Override
+    public User getByUsername(String username) {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "FROM User u WHERE u.pseudo=:pseudo";
+        Query query = session.createQuery(hql);
+        query.setParameter("pseudo", username);
+        List list = query.list();
+        transaction.commit();
+        Iterator iterator = list.iterator();
+        User user = (User) iterator.next();
+        session.close();
+        return user;
+    }
+
 }

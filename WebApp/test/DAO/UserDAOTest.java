@@ -41,7 +41,7 @@ public class UserDAOTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void hello() {
+    public void mainTest() {
         //GIVEN
         User user = new User();
         user.setId(null);
@@ -52,6 +52,14 @@ public class UserDAOTest {
         userRes = userDAO.create(user);
         //THEN
         assertNotNull(userRes.getId());
+        
+        //Test the custom method for UserDAO
+        //TODO: Create a single UnitTest for the case below
+        //WHEN
+        userRes = userDAO.getByUsername("Pierre");
+        //THEN
+        assertNotNull(userRes.getId());
+        assertEquals(userRes.getPseudo(),"Pierre");
     }
     
     @After
