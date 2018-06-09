@@ -7,9 +7,6 @@ package controller;
 
 import DAO.UserDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,49 +32,36 @@ public class UserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
+
             String pseudo = request.getParameter("pseudo");
             String password = request.getParameter("password");
             if (pseudo.equals("") && password.equals("")) {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<body>");
-                out.println("Erreur");
-                out.println("</body>");
-                out.println("</html>");
-                out.close();
+                redirectToLoginPage(request, response);
             } else {
                 UserDAOImpl userDAO = new UserDAOImpl();
                 User user = userDAO.getByUsername(pseudo);
-                
-                if (user!=null && user.getPseudo().equals(pseudo)) {
+
+                if (user != null && user.getPseudo().equals(pseudo)) {
                     if (password.equals(user.getPassword())) {
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<body>");
-                        out.println("Utilisateur " + user.getPseudo() + " connecté.");
-                        out.println("</body>");
-                        out.println("</html>");
-                        out.close();
-                        
+              
+                        request.setAttribute("pseudo", user.getPseudo());
+                        getServletConfig().getServletContext().getRequestDispatcher(
+                                "/vue/accueil.jsp").forward(request, response);
                     }
-                    
-                }
-                else{
-                    out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<body>");
-                        out.println("Erreur de connexion.");
-                        out.println("</body>");
-                        out.println("</html>");
-                        out.close();
+
+                } else {
+                    redirectToLoginPage(request, response);
                 }
             }
         }
+    
+    public void redirectToLoginPage(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
+    {
+        request.setAttribute("pseudo", "");
+                        getServletConfig().getServletContext().getRequestDispatcher(
+                                "/vue/connexion.jsp").forward(request, response);
     }
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
