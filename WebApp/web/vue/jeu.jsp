@@ -4,6 +4,8 @@
     Author     : Nous1
 --%>
 
+<%@page import="model.User"%>
+<%@page import="DAO.UserDAOImpl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,10 +65,21 @@
                 if(nbRoundT>nbRound){
                    
                     out.println("<h1>Votre partie est fini , votre score est de : "+score+"</h1>");
-                }
-                else{
+                    if(score>0){
+                    UserDAOImpl userDAO;
+                    userDAO =new UserDAOImpl();
+                    User user=new User();
+                    user=userDAO.findById(idUser, user);
+                    int scoreUser=user.getScore();
+                    user.setScore(scoreUser+score);
+                    userDAO.update(user);
                     
+                    
+                    }
+                    
+                   out.println("<a href='http://localhost:8080/WebApp/vue/accueil.jsp'><button type='button'> Revenir à l'accueil </button> <a>");
                 }
+                
             }
            
             if(tour.equals("ordi")){
