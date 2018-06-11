@@ -11,33 +11,38 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.User"%>
 <%@page import="model.Game"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Page d'accueil</title>
     </head>
+    
     <body>    
-          
+        
         <%! int id=0; %>
         <%! String pseudo="15"; %>
         <% 
-            if( request.getParameter("pseudo")!=null){ pseudo=request.getParameter("pseudo");}
+            if( request.getAttribute("pseudo")!=null){ pseudo=(String)request.getAttribute("pseudo");}
             UserDAOImpl userDAO = new UserDAOImpl();
-            List<User> users = userDAO.findAll();
+            
+            User user = userDAO.getByUsername(pseudo);
+            
             GameDAOImpl gameDAO = new GameDAOImpl();
             List<Game> games = gameDAO.findAll();
         %>
        
+        
+        
         <h1> Bienvenue <%= pseudo%></h1>
         
         <h2> Parametres compte :</h2>
         
         <div>Vous avez réalisé <%=games.size()%></div>
         
-        
-        
-        
+        <div>Votre score est de <%=user.getScore()%></div>
+         
         <h2> Parametres partie :</h2>
         <div>
             <label> Choisissez le nombre de manches : </label><br>
@@ -52,15 +57,20 @@
         </div></br>
         
         
-        <div>
+        <label> Choisissez le type d'adversaire : </label><br>
+            <input type=radio id="choixordi" name=choixadversaire value="Choix 1" checked=checked> Ordinateur </input><br>
+            <input type=radio id="choixutil" name=choixadversaire value="Choix 2" onclick="document.getElementById('listutil').style.display = 'block'"> Utilisateur </input><br>
+        
+        <div id="listutil" style="display: none;">
             <label> Liste des utilisateurs : </label><br>
-            <% for(User u: users){ %>
+            <% List<User> users = userDAO.findAll();
+               for(User u: users){ %>
             <div><%=u.getPseudo()%></div><br>
             <input type=radio id="<%=u.getId()%>" name=choixAdversaire value="Choix<%=u.getId()%>"><%=u.getPseudo()%> </input><br>
             <% } %>
         </div>
         
-        <!-- Envoyer deux parametres à Elsa NbManches et l'IdUser -->
+        
         
     </body>
 </html>
