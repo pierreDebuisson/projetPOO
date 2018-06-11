@@ -60,6 +60,12 @@ public class Game implements Serializable {
         this.id = id;
     }
 
+    public Game(int nbRound, User idUser) {
+        this.nbRound = nbRound;
+        this.idUser = idUser;
+    }
+
+    
     public Game(Integer id, String date, int nbRound) {
         this.id = id;
         this.date = date;
