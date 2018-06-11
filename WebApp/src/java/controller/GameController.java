@@ -63,21 +63,18 @@ public class GameController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        System.out.println("test");
-        
         UserDAOImpl userDAO = new UserDAOImpl();
-        int idUser = Integer.parseInt(request.getParameter("idUser"));
-        int nbRound = Integer.parseInt(request.getParameter("nbRound"));
+        int idUser = Integer.parseInt(request.getParameter("choixutilisateur"));
+        int nbRound = Integer.parseInt(request.getParameter("choix"));
         User user = userDAO.findById(idUser,new User());
         
-         
                 Game gameForm = new Game(nbRound, user);
                 GameDAOImpl gameDAO = new GameDAOImpl();
                 Game game = gameDAO.create(gameForm);
 
-                request.setAttribute("pseudo", user.getPseudo());
+                /*request.setAttribute("pseudo", user.getPseudo());
                 getServletConfig().getServletContext().getRequestDispatcher(
-                        "/vue/jeu.jsp").forward(request, response);
+                        "/vue/jeu.jsp").forward(request, response);*/
             }
 
 

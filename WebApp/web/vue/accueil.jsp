@@ -45,19 +45,21 @@
          
         <h2> Parametres partie :</h2>
         
-        <form id="formGameRegister" method="POST" action="/WebApp/GameController" /> 
+        <form id="formGameRegister" method="GET" action="/WebApp/GameController" /> 
             <div>
                 <label> Choisissez le nombre de manches : </label><br>
-                <input type=radio id="choix1" name=choix value="Choix 1" checked=checked> 3 Manches </input><br>
-                <input type=radio id="choix2" name=choix value="Choix 2"> 4 Manches </input><br>
-                <input type=radio id="choix3" name=choix value="Choix 3" > 5 Manches </input><br>
-                <input type=radio id="choix4" name=choix value="Choix 4" > 6 Manches </input><br>
-                <input type=radio id="choix5" name=choix value="Choix 5" > 7 Manches </input><br>
-                <input type=radio id="choix6" name=choix value="Choix 6" > 8 Manches </input><br>
-                <input type=radio id="choix7" name=choix value="Choix 7" > 9 Manches </input><br>
-                <input type=radio id="choix8" name=choix value="Choix 8" > 10 Manches </input><br>
+                <input type=radio id="choix1" name=choix value="1" checked=checked> 3 Manches </input><br>
+                <input type=radio id="choix2" name=choix value="2"> 4 Manches </input><br>
+                <input type=radio id="choix3" name=choix value="3" > 5 Manches </input><br>
+                <input type=radio id="choix4" name=choix value="4" > 6 Manches </input><br>
+                <input type=radio id="choix5" name=choix value="5" > 7 Manches </input><br>
+                <input type=radio id="choix6" name=choix value="6" > 8 Manches </input><br>
+                <input type=radio id="choix7" name=choix value="7" > 9 Manches </input><br>
+                <input type=radio id="choix8" name=choix value="8" > 10 Manches </input><br>
             </div></br>
         
+            
+            
             <label> Choisissez le type d'adversaire : </label><br>
             <input type=radio id="choixordi" name=choixadversaire value="Choix 1" checked=checked onclick="document.getElementById('listutil').style.display = 'none'"> Ordinateur </input><br>
             <input type=radio id="choixutil" name=choixadversaire value="Choix 2" onclick="document.getElementById('listutil').style.display = 'block'"> Utilisateur </input><br>
@@ -67,7 +69,7 @@
                 <% List<User> users = userDAO.findAll();
                    for(User u: users){ %>
                 <input type=radio id="<%=u.getId()%>" name=choixutilisateur value="Choix<%=u.getId()%>"><%=u.getPseudo()%> </input><br>
-
+                                            
                 <% } %>
             </div>
  
