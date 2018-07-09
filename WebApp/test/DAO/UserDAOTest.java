@@ -1,10 +1,5 @@
 package DAO;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.util.List;
 import model.User;
@@ -37,9 +32,7 @@ public class UserDAOTest {
         }
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+    
     @Test
     public void mainTest() {
         //GIVEN
